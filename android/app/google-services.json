@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "775576034236",
+    "project_id": "brilloconnetz",
+    "storage_bucket": "brilloconnetz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775576034236:android:29bcde6ad762ae2702e9b9",
+        "android_client_info": {
+          "package_name": "net.brilloconnetz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775576034236-dtj6srslkfqkontu1kas907la3d7g493.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.brilloconnetz.app",
+            "certificate_hash": "5b94b46eba725de338ac95ba51ba124f9c26341f"
+          }
+        },
+        {
+          "client_id": "775576034236-tbt95l36akh7rtbup22m5i6uut2roqpq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUr2FKLuu0ykOUi6llDMSm2eIkJ0EsbpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775576034236-tbt95l36akh7rtbup22m5i6uut2roqpq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
