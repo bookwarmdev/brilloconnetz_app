@@ -1,5 +1,5 @@
 import 'package:brilloconnetz_app/core/utils/utils.dart';
-import 'package:brilloconnetz_app/views/home/home.dart'; 
+import 'package:brilloconnetz_app/views/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,45 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isPasswordValide = false;
   bool _isPhoneNumberValide = false;
   bool _isMobilePasswordValide = false;
+
+  void fech_otp() {
+    Future<void> phonenumberauth(BuildContext context) async {
+      return await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: mobilenumber,
+        // timeout: const Duration(seconds: 60),
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Sign the user in (or link) with the auto-generated credential
+          await auth.signInWithCredential(credential);
+          print('-----------------1---------------------');
+          AppDialog().showSnackBar(
+              context, 'Verification Code sent on the phone number');
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          if (e.code == 'invalid-phone-number') {
+            AppDialog().showSnackBar(
+                context, 'The provided phone number is not valid.');
+          } else {
+            print('--------------------------2------------');
+            print(e);
+            print('--------------------------2------------');
+          }
+        },
+        codeSent: (String verificationId, int? resendToken) async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ),
+          );
+
+          AppDialog().showSnackBar(context, 'Success');
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          print('-------------------end-------------------');
+        },
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -152,7 +191,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           Container(),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const ForgetPasswordScreen(),),);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgetPasswordScreen(),
+                                ),
+                              );
                             },
                             child: Text(
                               'forget password',
@@ -187,12 +232,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     await auth.signInWithEmailAndPassword(
                                         email: email.text,
                                         password: password.text);
-                                        Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return const HomeScreen();
-                              }),
-                            );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return const HomeScreen();
+                                  }),
+                                );
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
                                   AppDialog().showSnackBar(
@@ -266,13 +311,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : _isPhoneNumberValide = false;
 
                             if (mobilenumber.length == 14) {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => MobileOtpScreen( mobilenumber: mobilenumber, mobileVerificarionID: mobileVerificarionID,),
-                              //   ),
-                              // );
-                              await phonenumberauth(context);
+                              fech_otp();
                             }
                           }),
                     ],
@@ -316,43 +355,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> phonenumberauth(BuildContext context) async {
-    return await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: mobilenumber,
-      // timeout: const Duration(seconds: 60),
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        // Sign the user in (or link) with the auto-generated credential
-        await auth.signInWithCredential(credential);
-        print('-----------------1---------------------');
-        AppDialog().showSnackBar(
-            context, 'Verification Code sent on the phone number');
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        if (e.code == 'invalid-phone-number') {
-          AppDialog()
-              .showSnackBar(context, 'The provided phone number is not valid.');
-        } else {
-          print('--------------------------2------------');
-          print(e);
-          print('--------------------------2------------');
-        }
-      },
-      codeSent: (String verificationId, int? resendToken) async {  
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>  const HomeScreen(),
-          ),
-        );
-
-        AppDialog().showSnackBar(context, 'Success');
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        print('-------------------end-------------------');
-      },
     );
   }
 }
