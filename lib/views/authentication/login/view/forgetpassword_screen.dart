@@ -1,4 +1,3 @@
-import 'package:brilloconnetz_app/core/utils/colors.dart';
 import 'package:brilloconnetz_app/core/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

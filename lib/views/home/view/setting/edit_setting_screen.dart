@@ -1,9 +1,7 @@
 import 'package:brilloconnetz_app/core/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
+ import 'package:flutter/material.dart';
+ 
 class EditSettingScreen extends StatefulWidget {
   const EditSettingScreen({Key? key}) : super(key: key);
 

@@ -28,8 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isEmailValide = false;
   bool _isPasswordValide = false;
-  bool _isPhoneNumberValide = false;
-  bool _isMobilePasswordValide = false;
+  bool _isPhoneNumberValide = false; 
 
   @override
   void dispose() {

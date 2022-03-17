@@ -1,8 +1,7 @@
 import 'package:brilloconnetz_app/core/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart'; 
 import '../../authentication.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
@@ -211,8 +210,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       const SizedBox(height: 3.0),
                       InternationalPhoneNumberInput(
                         onInputChanged: (PhoneNumber number) {
-                          // print(number.phoneNumber);
-                          mobilenumber = number.phoneNumber!;
+                           mobilenumber = number.phoneNumber!;
                           print(mobilenumber);
                         },
                         onInputValidated: (bool value) {
